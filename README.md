@@ -1,6 +1,12 @@
 # Data-Analysis-Excel-
 Beginner data analysis projects built during my DSA course using Excel
 [AmazonDashboardBy Olamilekan Lawal.xlsx](https://github.com/user-attachments/files/21041942/AmazonDashboardBy.Olamilekan.Lawal.xlsx)
+
+![chart 1](https://github.com/user-attachments/assets/eb752236-b74d-4813-983e-0537c122aa48)
+![Dashboard](https://github.com/user-attachments/assets/03703965-de45-4fcd-be6a-4760e9ebbb16)
+![chart 3](https://github.com/user-attachments/assets/757271f6-14b2-4389-9835-90afd14da3eb)
+![chart 2](https://github.com/user-attachments/assets/a8a33694-f478-4a2f-a301-4c92962e9eff)
+
 # 📊 Sales Dashboard Project
 
 This project showcases my ability to use **Microsoft Excel** for practical data analysis and reporting.
