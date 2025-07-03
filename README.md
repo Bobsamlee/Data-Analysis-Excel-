@@ -34,6 +34,11 @@ This project showcases my ability to use **Microsoft Excel** for practical data 
 3. Use the slicers and filters to explore the dashboard interactively.
 
 ---
+![Dashboard](https://github.com/user-attachments/assets/5d758d8f-bb97-4045-96bb-badf0fdc68e6)
+![chart 3](https://github.com/user-attachments/assets/16f6e3a8-17b2-4e80-962b-8981af978373)
+![chart 2](https://github.com/user-attachments/assets/972ebc9a-7e20-44f2-8fb8-1fb4a69aac0a)
+![chart 1](https://github.com/user-attachments/assets/aaf5364d-474b-417d-b487-e4aac9982be8)
+
 
 **This project demonstrates my ability to clean data, build clear reports, and deliver insights visually — all using Excel.**
 
