@@ -1,47 +1,230 @@
-# Data-Analysis-Excel-
-Beginner data analysis projects built during my DSA course using Excel
-[AmazonDashboardBy Olamilekan Lawal.xlsx](https://github.com/user-attachments/files/21041942/AmazonDashboardBy.Olamilekan.Lawal.xlsx)
-
-![chart 1](https://github.com/user-attachments/assets/eb752236-b74d-4813-983e-0537c122aa48)
-![Dashboard](https://github.com/user-attachments/assets/03703965-de45-4fcd-be6a-4760e9ebbb16)
-![chart 3](https://github.com/user-attachments/assets/757271f6-14b2-4389-9835-90afd14da3eb)
-![chart 2](https://github.com/user-attachments/assets/a8a33694-f478-4a2f-a301-4c92962e9eff)
-
-# 📊 Sales Dashboard Project
-
-This project showcases my ability to use **Microsoft Excel** for practical data analysis and reporting.
-
-## ✅ **What’s Inside**
-
-- **Cleaned Sales Data**: Structured data for analysis.
-- **Pivot Tables**: Used to summarize sales by category, region, and time period.
-- **Charts & Graphs**: Visualize key trends and comparisons.
-- **Interactive Dashboard**: Combines pivot tables and charts for easy insights.
-
-## 🎯 **Key Insights**
-
-- Identifies top-selling products and categories.
-- Highlights sales trends over time.
-- Shows performance by region or customer segment.
-- Helps management make data-driven decisions quickly.
-
-## 🛠️ **Tools Used**
-
-- Microsoft Excel
-- Pivot Tables
-- Pivot Charts
-- Conditional Formatting
-- Slicers
-
-## 📌 **How to Use**
-
-1. Download the `.xlsx` file.
-2. Open in Microsoft Excel (2016 or newer recommended).
-3. Use the slicers and filters to explore the dashboard interactively.
-
----
+# SQL QUERY
+[create database KMS
+select * from KMS_Case_Study
+select * from Order_Status
 
 
-**This project demonstrates my ability to clean data, build clear reports, and deliver insights visually — all using Excel.**
+1. Product category with the highest sales
 
-📈✨
+SELECT TOP 1
+    "Product_Category",
+    SUM(Sales) AS Total_Sales
+FROM 
+    kms_case_study
+GROUP BY 
+    "Product_Category"
+ORDER BY 
+    Total_Sales DESC
+
+ "THE PRODUCT CATEGORY WITH THE HIGHEST SALES IS TECHNOLOGY WITH $5,984,248 SALES"
+
+
+2. Top three and Bottom three regions in terms of sales
+      "Top three Total Sales"
+SELECT TOP 3
+	"region",
+	Sum(Sales) AS Top_3_Total_Sales
+FROM
+	kms_case_study
+GROUP BY
+	Region
+ORDER BY
+	TOP_3_Total_Sales DESC
+
+	  Region	Top_3_Total_Sales
+	1. West		$3,597,549.3
+	2  Ontario	$3,063,212.4
+	3. Prarie	$2,837,304.6
+
+"Bottom three Total Sales"
+SELECT TOP 3
+     region,
+	 Sum(sales) AS Bottom_3_Total_Sales
+FROM
+    KMS_Case_Study
+GROUP BY
+	Region
+ORDER BY BOTTOM_3_Total_Sales ASC
+
+	Region			Bottom_3_Total_Sales
+     1.	Nunavut			$116,376.5
+     2. Northwest Territories	$800,847.3
+     3. Yukon			$975,867.4
+
+
+3. Total sales of appliances in Ontario 
+
+SELECT
+	SUM(Sales) AS Ontario_Appliances_Sales
+FROM 
+	KMS_Case_Study
+WHERE
+	Province = 'Ontario'
+	AND
+	Product_Sub_Category = 'Appliances'
+
+	"Total sales of appliances in Ontario is $202,346.8"
+
+
+4. Advise for the management of KMS on what to do to increase the revenue from the bottom 10 customers
+
+SELECT TOP 10
+	"Customer_Name",
+	Sum(Sales) AS Total_Sales
+FROM 
+	KMS_Case_Study
+GROUP BY
+	"Customer_Name"
+ORDER BY 
+	Total_Sales ASC
+
+Advice for Increasing Revenue from Bottom 10 Customers:
+  i.   Offer targeted promotions and_personalized product recommendations.
+  ii.  Engage them with loyalty programs_or_bundle deals to encourage larger purchases.
+  iii. Conduct customer feedback surveys to understand their low engagement_and_adapt offerings.
+  iv.  Ensure proactive customer service to build stronger relationships.-------
+
+
+5. KMS shipping method with the most incured costs
+
+SELECT TOP 1
+	"Ship_Mode",
+	Sum(Shipping_Cost) AS Highest_Shipping_Cost
+FROM
+	KMS_Case_Study
+GROUP BY
+	"Ship_Mode"
+ORDER BY
+	Highest_Shipping_Cost DESC
+
+	"The shipping mode with the Highest_Shipping_Cost is Delivery Truck with $51,971.9 incurred"
+
+
+6. The most valuable customers and_their products or services
+
+SELECT TOP 10 
+    "Customer_Name",
+    SUM(Sales) AS Total_Sales,
+  COUNT(DISTINCT Product_Category) AS Product_Variety,---
+    (
+      SELECT DISTINCT [Product_Category] + ', '
+      FROM KMS_Case_Study AS inner_data
+      WHERE inner_data.Customer_Name = outer_data.Customer_Name
+      FOR XML PATH('')
+    ) AS Product_Categories
+FROM 
+   KMS_Case_Study AS outer_data
+GROUP BY 
+    "Customer_Name"
+ORDER BY 
+    Total_Sales DESC;
+
+	"The 3 most valuable customers are:"
+Customer_Name		Total_Sales		Product_Categories
+Emily Phan		$117,124.4	Furniture, Office Supplies, Technology, 
+Deborah Brumfield	$97,433.1	Furniture, Office Supplies, Technology, 
+Roy Skaria		$92,542.1	Furniture, Office Supplies, Technology, 
+
+
+7. Small business customer with the highest sales
+
+SELECT TOP 1
+  "Customer_Name",
+	"Customer_Segment",
+	SUM(Sales) AS Total_Sales
+FROM 
+	KMS_Case_Study
+WHERE 
+	Customer_Segment = 'Small Business'
+GROUP BY
+	"Customer_Segment",
+	"Customer_Name"
+ORDER BY 
+	Total_Sales DESC
+
+	"Small business customer with the highest sales is Dennis Kane with $75,967.6 sales"
+
+
+8. The Corporate Customer that placed the most number of orders in 2009 – 2012
+
+SELECT TOP 2
+	"Customer_Name",
+	"Customer_Segment",
+	"Order_Date",
+	COUNT(Order_Quantity) AS Total_Orders
+FROM
+	KMS_Case_Study
+WHERE 
+	Customer_Segment = 'Corporate'
+	AND TRY_CAST([Order_Date] AS DATE) BETWEEN '2009-01-01' AND '2012-12-31'
+GROUP BY
+	"Customer_Name",
+	"Customer_Segment",
+	"Order_Date"
+ORDER BY
+	Total_Orders DESC
+
+	"The Corporate Customer that placed the most number of orders in 2009 – 2012 are:"
+	Customer_Name	Customer_Segment	Order_Date	Total_Orders
+	Justin Knight	Corporate		2009-07-06	6
+	Laurel Elliston	Corporate		2010-11-01	6
+
+
+9. Most profitable Consumer customer
+
+SELECT TOP 1
+	"Customer_Name",
+	"Customer_Segment",
+	"Profit",
+	SUM(Profit) AS Most_Profitable
+FROM
+	KMS_Case_Study
+WHERE 
+	Customer_Segment = 'Consumer'
+GROUP BY 
+	"Customer_Name",
+	"Customer_Segment",
+	"Profit"
+ORDER BY
+	Most_Profitable DESC
+
+	"The Most profitable Consumer customer is Emily Phan with $27220.7 sales"
+
+10. The customer which returned items, and_their segment
+
+Select
+Distinct o.[Customer_Name], [Customer_Segment]
+From [KMS_Case_Study] As o
+Join
+[Order_status] As os
+On o.[Order_id] = os. [Order_id]
+Where os.[Status] = 'Returned'
+
+
+11. If the delivery truck is the most economical but the slowest shipping method
+and_Express Air is the fastest but the most expensive one, do you think the company
+appropriately spent shipping costs based on_the Order Priority? Explain your answer 
+
+
+SELECT 
+    "Order_Priority", 
+    "Ship_Mode", 
+    COUNT(Order_ID) AS Order_Count, 
+    SUM(Sales * Discount) AS Estimated_Shipping_Cost
+FROM
+    KMS_Case_Study
+GROUP BY 
+    "Order_Priority",
+	"Ship_Mode"
+ORDER BY 
+    "Order_Priority", 
+	"Ship_Mode"; 
+
+How to interpret:
+
+	- High-priority orders should ideally use Express Air more frequently.
+
+	- Low-priority orders should lean toward Delivery Truck (economical).
+
+	- If high-cost methods are used for low-priority orders, this suggests inefficient shipping spend.
+Uploading KMSSqlCaseStudy.sql…]()
