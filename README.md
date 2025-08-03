@@ -1,4 +1,5 @@
 # SQL QUERY
+~~~ SQL
 [create database KMS
 select * from KMS_Case_Study
 select * from Order_Status
